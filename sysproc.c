@@ -92,13 +92,13 @@ sys_uptime(void)
 
 int
 sys_trace(void){
- int pid = proc->pid;
- int action;
- if(argint(0,&action) == 0){
-  cprintf("PID:=%d .....Answer is 0!\n",pid);
+ int isTrace;
+ if(argint(0,&isTrace) != 0){
+  proc->isTrace=isTrace; //set to nonZero
  }
- else{
-  cprintf("Trace isn't 0! But this works!\n");
+ else{//if it equals nonzero
+  proc->isTrace=isTrace;//set to Zero. Redundant, but rushing
+  cprintf("WOO!! ANSWER IS 0. PRINT COUNT\n");
  }
  return 0;
 }

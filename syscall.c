@@ -129,8 +129,10 @@ void
 syscall(void)
 {
   int num;
-
   num = proc->tf->eax;
+  if(proc->isTrace!=0){
+    cprintf("pid: %d [%s] syscall(%d)\n",proc->pid,proc->name,num);
+  }
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
     proc->tf->eax = syscalls[num]();
   } else {
