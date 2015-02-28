@@ -99,6 +99,7 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_trace(void);
+extern int sys_csinfo(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -123,6 +124,7 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_trace]   sys_trace,
+[SYS_csinfo]  sys_csinfo,
 };
 
 void
@@ -155,6 +157,7 @@ syscall(void)
     else if(num==20){syscallName="mkdir";}
     else if(num==21){syscallName="close";}
     else if(num==22){syscallName="trace";}
+    else if(num==23){syscallName="csinfo";}
     cprintf("pid: %d [%s] syscall(%d=%s)\n",proc->pid,proc->name,num,syscallName);
   }
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {

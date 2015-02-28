@@ -313,6 +313,8 @@ sched(void)
   if(readeflags()&FL_IF)
     panic("sched interruptible");
   intena = cpu->intena;
+
+  proc->numCsInfo += 1;
   swtch(&proc->context, cpu->scheduler);
   cpu->intena = intena;
 }
