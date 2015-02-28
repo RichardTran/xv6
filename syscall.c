@@ -129,6 +129,7 @@ void
 syscall(void)
 {
   int num;
+  proc->numOfCalls=proc->numOfCalls+1;
   num = proc->tf->eax;
   if(proc->isTrace!=0){
     cprintf("pid: %d [%s] syscall(%d)\n",proc->pid,proc->name,num);

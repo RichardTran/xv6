@@ -93,12 +93,13 @@ sys_uptime(void)
 int
 sys_trace(void){
  int isTrace;
- if(argint(0,&isTrace) != 0){
+ argint(0,&isTrace);
+ if(isTrace != 0){
   proc->isTrace=isTrace; //set to nonZero
  }
  else{//if it equals nonzero
   proc->isTrace=isTrace;//set to Zero. Redundant, but rushing
-  cprintf("WOO!! ANSWER IS 0. PRINT COUNT\n");
+  cprintf("System calls executed: %d\n",proc->numOfCalls);
  }
- return 0;
+ return proc->numOfCalls;
 }
