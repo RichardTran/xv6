@@ -129,10 +129,33 @@ void
 syscall(void)
 {
   int num;
-  proc->numOfCalls=proc->numOfCalls+1;
   num = proc->tf->eax;
+  proc->numOfCalls=proc->numOfCalls+1;
   if(proc->isTrace!=0){
-    cprintf("pid: %d [%s] syscall(%d)\n",proc->pid,proc->name,num);
+    char *syscallName;
+    if(num==1){syscallName="fork";}
+    else if(num==2){syscallName="exit";}
+    else if(num==3){syscallName="wait";}
+    else if(num==4){syscallName="pipe";}
+    else if(num==5){syscallName="read";}
+    else if(num==6){syscallName="kill";}
+    else if(num==7){syscallName="exec";}
+    else if(num==8){syscallName="fstat";}
+    else if(num==9){syscallName="chdir";}
+    else if(num==10){syscallName="dup";}
+    else if(num==11){syscallName="getpid";}
+    else if(num==12){syscallName="sbrk";}
+    else if(num==13){syscallName="sleep";}
+    else if(num==14){syscallName="uptime";}
+    else if(num==15){syscallName="open";}
+    else if(num==16){syscallName="write";}
+    else if(num==17){syscallName="mknod";}
+    else if(num==18){syscallName="unlink";}
+    else if(num==19){syscallName="link";}
+    else if(num==20){syscallName="mkdir";}
+    else if(num==21){syscallName="close";}
+    else if(num==22){syscallName="trace";}
+    cprintf("pid: %d [%s] syscall(%d=%s)\n",proc->pid,proc->name,num,syscallName);
   }
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
     proc->tf->eax = syscalls[num]();
