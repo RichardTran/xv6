@@ -103,3 +103,9 @@ sys_trace(void){
  }
  return proc->numOfCalls;
 }
+
+int 
+sys_csinfo(void){
+ return proc->numCsInfo; 
+}
+}
